@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.divBox{
+			float:left;
+			width:100px;
+			height: 100px;
+			margin:0 0 0 100px;		     /*这种情况之下IE会产生200px的距离*/
+		/*	display:inline; 		*/		   /*使浮动忽略*/
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="divBox"></div><div class="divBox"></div><div class="divBox"></div><div class="divBox"></div>
+	<table id="test">
+		<tbody>
+			<tr><th>a</th><th>b</th></tr>
+			<tr><td>1</td><td>2</td></tr>
+		</tbody>
+	</table>
+	<script type="text/javascript">
+		var tabelHtml = document.getElementById('test').innerHTML;
+		console.log(tabelHtml);
+	</script>
+</body>
+</html>
