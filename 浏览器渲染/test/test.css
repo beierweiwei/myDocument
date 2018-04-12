@@ -1,0 +1,34 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+.header {
+	width: 100%;
+	height: 60px;
+	
+	background: red;
+}
+
+.header .menu {
+	line-height: 60px;
+	font-size: 14px;
+	font-weight: bold;
+	overflow: hidden;
+
+}
+
+.header .menu .menu-item {
+	float: left;
+	margin-right: 20px;
+	width: 60px;
+	background: #f60;
+	list-style: none;
+	text-align: center;
+	color: #fff;
+}
+
+.main {
+	width: 960px;
+	margin: 10px auto;
+}
+
