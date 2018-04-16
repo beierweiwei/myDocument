@@ -51,37 +51,29 @@ optionObj
   * `paths`: {}, 模块id名称和指定路径的键值对。
   * `bundles`: 2.10版本引入；
   * `shim`: 传统型的全局注入变量和未使用define定义依赖的遗留类库，你必须使用shim来指定他们的依赖关系。
-
-  paths fallbacks
-  当运行在浏览器里面时，可以指定paths fallbacks。先尝试从cdn加载模块，如果cdn加载失败了就加载指定的paths fallbacks。
-
-  ```js
-
-  ```
-
-  *如果你没有指明依赖关系，加载可能报错。这是因为基于速度的原因，RequireJS会异步地以无序的形式加载这些库*
+ *如果你没有指明依赖关系，加载可能报错。这是因为基于速度的原因，RequireJS会异步地以无序的形式加载这些库*
 
 
-  ```js
-	requirejs.config({
-	    //By default load any module IDs from js/lib
-	    baseUrl: 'js/lib',
-	    //except, if the module ID starts with "app",
-	    //load it from the js/app directory. paths
-	    //config is relative to the baseUrl, and
-	    //never includes a ".js" extension since
-	    //the paths config could be for a directory.
-	    paths: {
-	        app: '../app'
-	    }
-	});
-	// Start the main app logic.
-	requirejs(['jquery', 'canvas', 'app/sub'],
-	function   ($,        canvas,   sub) {
-	    //jQuery, canvas and the app/sub module are all
-	    //loaded and can be used here now.
-	});		
-  ```
+```js
+requirejs.config({
+    //By default load any module IDs from js/lib
+    baseUrl: 'js/lib',
+    //except, if the module ID starts with "app",
+    //load it from the js/app directory. paths
+    //config is relative to the baseUrl, and
+    //never includes a ".js" extension since
+    //the paths config could be for a directory.
+    paths: {
+        app: '../app'
+    }
+});
+// Start the main app logic.
+requirejs(['jquery', 'canvas', 'app/sub'],
+function   ($,        canvas,   sub) {
+    //jQuery, canvas and the app/sub module are all
+    //loaded and can be used here now.
+});		
+```
 
  如果没有明确配置conifg中的baseUrl, srcipt标签的data-main属性也没有用时，require.js默认从使用requre.js的html被包含的文件夹为baseUrl。
 
@@ -100,6 +92,164 @@ optionObj
   * 以.js结束
   * 以'/'开头
   * 包含协议, 如 'http、https'
+
+
+### paths fallbacks
+当运行在浏览器里面时，可以指定paths fallbacks。先尝试从cdn加载模块，如果cdn加载失败了就加载指定的paths fallbacks。
+
+*note: pahts fallbacks只在具体的模块匹配时才会生效。这和普通的paths配置不同，paths配置可以应用到模块id的前缀部分*
+
+
+```js
+requirejs.config({
+    //To get timely, correct error triggers in IE, force a define/shim exports check.
+    enforceDefine: true,
+    paths: {
+        jquery: [
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min',
+            //If the CDN location fails, load from this location
+            'lib/jquery'
+        ]
+    }
+});
+
+//Later
+require(['jquery'], function ($) {
+});
+```
+
+### bundles
+
+```js
+requirejs.config({
+    bundles: {
+        'primary': ['main', 'util', 'text', 'text!template.html'],
+        'secondary': ['text!secondary.html']
+    }
+});
+
+require(['util', 'text'], function(util, text) {
+    //The script for module ID 'primary' was loaded,
+    //and that script included the define()'d
+    //modules for 'util' and 'text'
+});
+```
+
+bundles只时设置在包含多个define模块脚本中从哪里去寻找包含在其中的模块。它没有自动绑定这些模块到打包模块的id上。bundle的模块id只是用来设定模块的定位。
+bundles配置和paths配置有些相像，但也有很大不同。paths对象的value是路径符号，而不允许设置为模块id。
+如果打包构建目标是不存在的模块id时或者在构建中你有不需要通过加载器加载的插件资源，bundles配置讲非常有用。
+*keys和values都是模块id，而不是路径符。它们都是绝对模块IDs,而不是和paths config 或者 map conifg一样是可以是一个模块的前缀*
+
+在requireJS2.20中，优化器可以生成一个bundles配置，将其插入顶层的requireJs.config()调用。more detail [bundlesConfigOutFile](https://github.com/requirejs/r.js/blob/98a9949480d68a781c8d6fc4ce0a07c16a2c8a2a/build/example.build.js#L641)
+
+### shime
+设置依赖， exports 和定制初始化对于那些老的传统的浏览器全局变量没有使用define()声明的依赖和设定模块值的脚本库。
+
+下面的例子需要requireJS 2.0以上，假设backbone.js、underscore.js和jquery.js已经被安装在baseUrl目录中。
+
+```js
+requirejs.config({
+    //Remember: only use shim config for non-AMD scripts,
+    //scripts that do not already call define(). The shim
+    //config will not work correctly if used on AMD scripts,
+    //in particular, the exports and init config will not
+    //be triggered, and the deps config will be confusing
+    //for those cases.
+    shim: {
+        'backbone': {
+            //These script dependencies should be loaded before loading
+            //backbone.js
+            deps: ['underscore', 'jquery'],
+            //Once loaded, use the global 'Backbone' as the
+            //module value.
+            exports: 'Backbone'
+        },
+        'underscore': {
+            exports: '_'
+        },
+        'foo': {
+            deps: ['bar'],
+            exports: 'Foo',
+            init: function (bar) {
+                //Using a function allows you to call noConflict for
+                //libraries that support it, and do other cleanup.
+                //However, plugins for those libraries may still want
+                //a global. "this" for the function will be the global
+                //object. The dependencies will be passed in as
+                //function arguments. If this function returns a value,
+                //then that value is used as the module export value
+                //instead of the object found via the 'exports' string.
+                //Note: jQuery registers as an AMD module via define(),
+                //so this will not work for jQuery. See notes section
+                //below for an approach for jQuery.
+                return this.Foo.noConflict();
+            }
+        }
+    }
+});
+
+//Then, later in a separate file, call it 'MyModel.js', a module is
+//defined, specifying 'backbone' as a dependency. RequireJS will use
+//the shim config to properly load 'backbone' and give a local
+//reference to this module. The global Backbone will still exist on
+//the page too.
+define(['backbone'], function (Backbone) {
+  return Backbone.Model.extend({});
+});
+
+
+```
+
+
+在RequireJS 2.0.* 中， shim 中的"exports" 属性也可以配置成一个函数。这种情况, 它的功能和上面的 "init" 属性一样。  "init" 属性用于RequireJS 2.1.0+ 中，如此， exports配置的字符串值可用于 [enforceDefine](http://requirejs.org/docs/api.html#config-enforceDefine)，也可用于类库加载后的一些功能性工作。
+
+像 jQuery 或者 Backbone 插件这种不需要导出一个模块值的模块，可以用 shim 只配置一个表示依赖项的数组：
+
+```js
+requirejs.config({
+    shim: {
+        'jquery.colorize': ['jquery'],
+        'jquery.scroll': ['jquery'],
+        'backbone.layoutmanager': ['backbone']
+    }
+});
+
+```
+
+
+然而如果你想要在IE中检测404并执行fallbacks 或者errbacks，那么就必须配置 exports ，这样加载器才能检测脚本是否加载成功：
+
+```js
+requirejs.config({
+    shim: {
+        'jquery.colorize': {
+            deps: ['jquery'],
+            exports: 'jQuery.fn.colorize'
+        },
+        'jquery.scroll': {
+            deps: ['jquery'],
+            exports: 'jQuery.fn.scroll'
+        },
+        'backbone.layoutmanager': {
+            deps: ['backbone']
+            exports: 'Backbone.LayoutManager'
+        }
+    }
+});
+```
+
+*关于`shim`配置重要注意事项：*
+
+* shim只是配置模块的依赖关系。需要加载 模块的话，还是需要用 调用require/define 。 设置shim不会触发加载代码。
+* shim配置的脚本只使用其他shim模块作为依赖，或者是没有依赖的AMD模块且在调用define()之后它们同样会生成一个全局变量（如jquery 或 lodash。因此如果你使用一个AMD模块作为shim配置模块的依赖，AMD模块可能直到shimed code 构建执行后才会执行，且会出现一个错误。最终的方法是升级所有的shime模块拥有AMD define调用配置。
+* 如果不可能升级shim模块代码，requireJS2.1.11中的优化器有一个[wrapShim build option](https://github.com/requirejs/r.js/blob/b8a6982d2923ae8389355edaa50d2b7f8065a01a/build/example.build.js#L68)将会尝试自动讲shim模块自动包裹define()函数。这讲改变shim依赖的作用域，所以这种方法不总是有效。
+* init方法讲不会调用对于AMD模块。
+* 在node使用requireJs,shim config将不被支持。因为node中没有喝浏览器中相同的全局环境变量。
+
+*关于优化器中‘shime’重要注意事项*
+
+* 你需要在 [mainConfigFile](http://requirejs.org/docs/optimization.html#mainConfigFile)打包配置 中指定shim配置项所在的配置文件。 否则，优化工具找不到 shim 配置。 另一种做法是在打包的配置文件中保留shim配置的副本。
+
 
 ## api 
 
@@ -174,6 +324,7 @@ defind(['require'], function(require) {
 
 
 ### 相对模块命名相对于其他模块的名字，而非路径
+
 
 ### 循环依赖
 
@@ -291,7 +442,7 @@ require(['jquery'], function ($) {
 
 ### 服务器中使用requireJs
 
-服务端使用同步加载，需要通过构建工具重新定义requrie.load()方法.服务端的 require.load 方法在build/jslib/requirePatch.js 中
+服务端使用同步加载，需要通过构建工具重新定义requrie.load()方法.服务端的 require.load 方法在build/jslib/requirePatch.js中
 
 ### require();
 
