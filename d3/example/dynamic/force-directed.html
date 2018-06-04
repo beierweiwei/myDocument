@@ -5,7 +5,7 @@
   	<style>
 		</style>
 </head> 
-
+  <button id="add">开始</button>
 <body>  
 <script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>  
         <script>		   
@@ -19,8 +19,8 @@
 					   { source : 0  , target: 3 } , { source : 1  , target: 4 } ,
 					   { source : 1  , target: 5 } , { source : 1  , target: 6 }  ];	
 		
-		var width = 400;
-		var height = 400;
+		var width = 800;
+		var height = 800;
 		
 		
 		var svg = d3.select("body")
@@ -89,6 +89,40 @@
 			 svg_texts.attr("x", function(d){ return d.x; })
 			 	.attr("y", function(d){ return d.y; });
 		});
+		d3.select('#add').on('click', function () {
+			nodes.push({name: '武汉'})
+			edges.push({ source : 7  , target: 1 })
+			force.nodes(nodes)		//指定节点数组
+				.links(edges)
+					force.start()
+			svg.selectAll("line")
+										.data(edges)
+										.enter()
+										.append("line")
+										.style("stroke","#ccc")
+										.style("stroke-width",1);
+      svg.selectAll("circle")
+							.data(nodes)
+							.enter()
+							.append("circle")
+							.attr("r",20)
+							.style("fill",function(d,i){
+								return color(i);
+							})
+							.call(force.drag);	//使得节点能够拖动
+
+			//添加描述节点的文字
+		  svg.selectAll("text")
+							.data(nodes)
+							.enter()
+							.append("text")
+							.style("fill", "black")
+							.attr("dx", 20)
+							.attr("dy", 8)
+							.text(function(d){
+								return d.name;
+							});
+		})
 </script>	  
 </body>
 </html>

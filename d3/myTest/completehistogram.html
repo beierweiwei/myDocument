@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<style type="text/css">
+		
+		.axis path,
+		.axis line{
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+
+	</style>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+var width = 500;	//画布的宽度
+var height = 500;	//画布的高度
+
+var padding = {
+	left: 30,
+	right: 30,
+	top: 20,
+	bottom: 20
+}
+
+
+// 定义svg
+var svg = d3.select('body')
+	.append('svg')
+	.attr('width', 500)
+	.attr('height', 500)
+
+var dataset = [30, 34, 50, 60, 74]
+
+var xAxisWidth =  (width - padding.left - padding.right) / dataset.length
+
+var min = d3.min(dataset)
+var max = d3.max(dataset)
+
+var rectWidth = 50
+
+// 定义x轴比例尺
+var xScale = d3.scale.ordinal()
+	.domain(d3.range(dataset.length))
+	.rangeRoundBands([0, width - padding.left - padding.right])
+// 定义y轴比例尺
+var yScale = d3.scale.linear()
+	.domain([0, max])
+	.range([height - padding.bottom - padding.top, 0])
+
+// 定义x轴坐标尺
+var xAxis = d3.svg.axis()
+	.scale(xScale)
+	.orient('bottom')
+	.ticks(dataset.length)
+
+svg.append('g')
+	.attr('class', 'axis')
+	.attr('transform', `translate(${padding.left},` + (height - padding.bottom) + ')')
+	.call(xAxis)
+
+// 定义y轴坐标尺
+var yAxis = d3.svg.axis()
+	.scale(yScale)
+	.orient('left')
+	.ticks(Math.ceil((height - padding.bottom - padding.top) / 20))
+
+svg.append('g')
+	.attr('class', 'axis')
+	.attr('transform', `translate(${padding.left}, ${padding.bottom})`)
+	.call(yAxis)
+
+var rect = svg.selectAll('rect')
+	.data(dataset)
+	.enter()
+	.append('rect')
+	.attr('x', function (d, i) {
+		return xAxisWidth * i + padding.left + (xAxisWidth - rectWidth) /2 
+	})
+	.attr('y', function (d, i) {
+		return yScale(d) + padding.bottom
+	})
+	.attr('height', function (d, i) {
+		return height - padding.top - padding.bottom - yScale(d)
+	})
+	.attr('width', rectWidth)
+	.fill('#f60')	
+			
+
+</script>
+</html>
