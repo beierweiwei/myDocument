@@ -45,7 +45,6 @@ debounce使用场景：
 
 对用户输入的验证，不在输入过程中就处理，停止输入后进行验证足以；
 提交ajax时，不希望1s中内大量的请求被重复发送。
-
 throttle使用场景
 
 第一次触发后先执行fn（当然可以通过{leading: false}来取消），然后wait ms后再次执行，在单位wait毫秒内的所有重复触发都被抛弃。即如果有连续不断的触发，每wait ms执行fn一次。与debounce相同的用例，但是你想保证在一定间隔必须执行的回调函数。例如：
@@ -136,7 +135,7 @@ function debounce(func, wait, immediate) {
 
 throttle函数
 
-```js 
+```
 /**
  * 创建并返回一个像节流阀一样的函数，当重复调用函数的时候，最多每隔 wait毫秒调用一次该函数
  * @param func 执行函数
