@@ -54,7 +54,7 @@
 		.attr("height",rectHeight-2)
 		.attr("fill","steelblue");
 
-	var axis = d3.svg.axis()
+	var axis = d3.svg.axis() // 刻度
 				.scale(linear)		//指定比例尺
 				.orient("bottom")	//指定刻度的方向
 				.ticks(7);			//指定刻度的数量
