@@ -119,12 +119,13 @@ class Chart {
 	// render
     // mount
   mount() {
+  	this.el.inerHTML = ''
   	this.svg = d3.select(this.el)
     	.append('svg')
     	.attr('width', this.style.width)
     	.attr('height', this.style.height)    
   }
-  create() {
+  create () {
   	var _this = this
     // 定义坐标轴
     // d3.svg.axis(): D3中坐标轴的组件， 能够在svg中生成组成坐标轴的元素
@@ -159,6 +160,63 @@ class Chart {
     	.fill(this.chart.node.color)	
   }
 
+  updateData (data) {
+  	if (data && isArray(data)) {
+  		this.data = data
+  		this.data.max = d3.max(data)
+  		this.data.min = d3.min(data)
+  	}
+  }
+
+  addDataNode (dataNode) {
+  	let data = this.data
+  	this.updateData(...data, dataNode)
+  }
+
+  removeDataNode (idx, lenth) {
+  	let data = this.data
+  	data.splice(idx, length)
+  	this.updateData(data)
+  }
+  updateDataNode (dataNode, idx, length) {
+  	let data = this.data 
+  	data.splice(idx, length, dataNode)
+  }
+  updataChart (opt) {
+  	this.initFn(opt)
+  	var _this = this
+    // 定义坐标轴
+    // d3.svg.axis(): D3中坐标轴的组件， 能够在svg中生成组成坐标轴的元素
+    // scale(): 指定比例尺
+    // orient(): 指定刻度朝向，button表示在坐标轴的下方显示
+    // ticks(): 指定刻度的数量
+
+    // 将坐标轴添加到svg中
+    // this.chart.axis = d3.svg.axis()
+    // 	.scale(this.scale)
+    // 	.orient(this.chart.orient)
+    // 	.ticks(this.chart.ticks)
+
+    // this.svg.append('g')
+    // 	.attr('class', 'axis')
+    // 	.attr('transform', 'translate(20, 130)')
+    // 	.call(this.chart.axis)
+
+
+    this.chart.node = this.svg.selectAll('rect')
+    	.data(this.data)
+    	.enter()
+    	.append('rect')
+    	.attr('x', 20)
+    	.attr('y', function (d, i) {
+    		return i * (_this.opt.node.height + _this.opt.node.gap)
+    	})
+    	.attr('height', this.chart.node.height)
+    	.attr('width', function (d, i) {
+    		return _this.chart.scale.x(d)
+    	})
+    	.fill(this.chart.node.color)	
+  }
   type (type) {
 		return this.typeOpt[type] || {}
 	}
