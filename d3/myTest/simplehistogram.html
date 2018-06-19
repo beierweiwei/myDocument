@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<style type="text/css">
+		
+		.axis path,
+		.axis line{
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+
+	</style>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+var width = 500;	//画布的宽度
+var height = 500;	//画布的高度
+var rectHeight = 25
+
+var svg = d3.select('body')
+	.append('svg')
+	.attr('width', 400)
+	.attr('height', 400)
+
+var dataset = [30, 34, 50, 60, 74]
+
+//定义比例尺
+
+// 于是，我们需要一种计算关系，能够：
+// 将某一区域的值映射到另一区域， 其大小关系不变
+// 这就是比例尺（scale）
+// 
+// 比例尺类型：
+// 线性比例尺
+
+// 将某一区域的值映射到另一区域，其大小关系不变。
+var min = d3.min(dataset)
+var max = d3.max(dataset)
+var line = d3.scale.linear()
+	.domain([0, max])
+	.range([0, 300]) 
+
+// 定义坐标轴
+// d3.svg.axis(): D3中坐标轴的组件， 能够在svg中生成组成坐标轴的元素
+// scale(): 指定比例尺
+// orient(): 指定刻度朝向，button表示在坐标轴的下方显示
+// ticks(): 指定刻度的数量
+
+// 将坐标轴添加到svg中
+var axis = d3.svg.axis()
+	.scale(line)
+	.orient('bottom')
+	.ticks(7)
+
+svg.append('g')
+	.attr('class', 'axis')
+	.attr('transform', 'translate(20, 130)')
+	.call(axis)
+
+
+var rect = svg.selectAll('rect')
+	.data(dataset)
+	.enter()
+	.append('rect')
+	.attr('x', 20)
+	.attr('y', function (d, i) {
+		return i * 25
+	})
+	.attr('height', rectHeight - 2)
+	.attr('width', function (d, i) {
+		return line(d)
+	})
+	.fill('steeblue')	
+			
+
+</script>
+</html>

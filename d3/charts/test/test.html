@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+
+	</style>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+	<div id="chart"></div>
+	<form>
+		<div><input id="add-node" type="text" name="add-node"/><button id="add">增加节点</button></div>
+		<div><label>切换类型</label>
+			<select id="type-select" value="histogram">
+				<option value="histogram">柱状图</option>
+				<option value="pie">饼状图</option>
+				<option value="fore">热力图</option>
+			</select>
+		</div>
+
+		<div><label>切换颜色</label>
+			<select id="color-select" value="black">
+				<option value="red">红色</option>
+				<option value="blue">蓝色</option>
+				<option value="white">白色</option>
+				<option value="black">黑色</option>
+				<option value="green">绿色</option>
+			</select>
+		</div>
+	</form>
+	
+</body>
+<script type="text/javascript" src="../src/main.js"></script>
+<script type="text/javascript">
+	(function (global) {
+		var chart = global.chart
+		var pageData = {addData: '', opt: {}}
+		// get input add data
+		getById('add').onclick = function (e) {
+			e.preventDefault()
+			pageData.addData = getById('add-node').value
+			updataChart()
+		}
+		// get type
+		getById('type-select').onchange = function (e) {
+			pageData.opt.type = this.value
+			updataChart()
+		}
+		getById('color-select').onchange = function (e) {
+			pageData.opt.style = {
+				color: this.value
+			}
+			updataChart()
+		}
+		function updataChart () {
+			chart.type = pageData.type
+			if(pageData.addData) {
+				chart.addDataNode(pageData.addData)
+				clearData()
+			}else {
+				chart.updateChart(pageData.opt)
+			}
+		}
+		function clearData () {
+			pageData.addData = ''
+			getById('add-node').value = ''
+		}
+		function getById(id) {
+			return document.getElementById(id)
+		}
+
+	})(window)
+
+</script>
+</html>
