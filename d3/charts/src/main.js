@@ -1,4 +1,6 @@
-let isArray = Array.isArray;
+(function (global, d3) {
+const isArray = Array.isArray;
+const hasOwnPro = Object.prototype.hasOwnProperty
 class Chart {
 	constructor (opt) {	
     this.initFn(opt)
@@ -12,6 +14,11 @@ class Chart {
 		//和动态
 		var baseOpt = {
 			name: 'chart',
+			transition: {
+				width: 0,
+				fill: 'red',
+				height: 0
+			},
 			data: [123,456,789,333,555,345,213],
 			xScale: {
 				type: 'line',
@@ -65,7 +72,7 @@ class Chart {
 		this.data.min = d3.min(this.data)
 		this.name = opt.name
 		this.style = { ...baseOpt.style, ...this.style, ...originOpt.style}
-
+    
 		this.chart.width = Number(this.style.width) - Number(this.style.left + this.style.right ) 
 		this.chart.height = Number(this.style.height) - Number(this.style.top + this.style.bottom) 
     this.chart.xAxis = originOpt.xAxis   || this.chart.xAxis  || baseOpt.xAxis
@@ -75,6 +82,7 @@ class Chart {
 		this.chart.node  =   originOpt.node  || this.chart.node   || baseOpt.node
 		this.chart.scale = {}
 		this.chart.axis = {}
+		this.chart.transition = opt.transition
 		this.type = originOpt.type || this.chart.type || baseOpt.type;
 		this.el = this.el || document.getElementById(originOpt.el)
 		this.svg = this.svg
@@ -152,7 +160,9 @@ class Chart {
   }
   create () {
   	var _this = this,
-  	nodes = this.chart.nodes
+  	chart = this.chart,
+  	nodes = chart.nodes,
+  	transition = chart.transition;
     // 定义坐标轴
     // d3.svg.axis(): D3中坐标轴的组件， 能够在svg中生成组成坐标轴的元素
     // scale(): 指定比例尺
@@ -172,18 +182,33 @@ class Chart {
 
 
     nodes = this.svg.selectAll('rect');
-    nodes.data(this.data)
+    nodes = nodes.data(this.data)
     	.enter()
     	.append('rect')
     	.attr('x', this.style.left)
     	.attr('y', function (d, i) {
     		return i * (_this.opt.node.height + _this.opt.node.gap)
     	})
-    	.attr('height', this.chart.node.height)
-    	.attr('width', function (d, i) {
-    		return _this.chart.scale.x(d)
-    	})
-    	.attr('fill', this.style.color)
+		
+		// transition 	
+
+		if (transition && typeof transition === 'object') {
+
+				for (let key in transition) {
+					console.log(key, transition[key])
+					if (hasOwnPro.call(transition, key)) {
+						nodes = nodes.attr(key, transition[key])
+					}
+				}
+				nodes = nodes.transition().duration(1000).delay(500)
+		}
+		
+
+		nodes.attr('height', this.chart.node.height)
+		.attr('width', function (d, i) {
+			return _this.chart.scale.x(d)
+		})
+		.attr('fill', this.style.color)
     // 刻度尺
     if (this.chart.xAxis) {
     	this.chart.axis.x = d3.svg.axis() // 刻度
@@ -292,4 +317,7 @@ Chart.typeOpt = {
 
 	}
 }
+global.Chart = Chart
+})(window, d3)
+
 var chart = Chart.init({el: 'chart'})
