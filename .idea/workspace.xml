@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="559063ba-4e34-43f0-91e6-95914009825c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/d3/charts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/d3/charts/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d3/charts/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/d3/charts/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/es6/generator.js" beforeDir="false" afterPath="$PROJECT_DIR$/es6/generator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/Module.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/Module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue源码解读/vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue源码解读/vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue相关/vue2.3+版本.sync使用.md" beforeDir="false" afterPath="$PROJECT_DIR$/vue相关/vue2.3+版本.sync使用.md" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/d3/charts/src/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="412">
+              <caret line="138" column="16" selection-start-line="138" selection-start-column="16" selection-end-line="138" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/d3/charts/src/main.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/d3/charts/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/@types/estree/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/@types/node/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/arr-diff/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/arr-flatten/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/array-unique/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/braces/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/builtin-modules/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/d3/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/estree-walker/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/expand-brackets/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/expand-range/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/extglob/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/filename-regex/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/fill-range/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/for-in/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/for-own/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/glob-base/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/glob-parent/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/is-buffer/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/is-dotfile/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/is-equal-shallow/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/is-extendable/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/is-extglob/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/is-glob/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/is-module/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/is-number/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/is-posix-bracket/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/is-primitive/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/isarray/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/isobject/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/kind-of/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/magic-string/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/math-random/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/micromatch/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/normalize-path/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/object.omit/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/parse-glob/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/path-parse/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/preserve/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/randomatic/node_modules/is-number/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/randomatic/node_modules/kind-of/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/randomatic/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/regex-cache/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/remove-trailing-separator/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/repeat-element/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/repeat-string/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/resolve/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/resolve/test/module_dir/zmodules/bbb/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/resolve/test/resolver/baz/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/resolve/test/resolver/browser_field/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/resolve/test/resolver/dot_main/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/resolve/test/resolver/dot_slash_main/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/resolve/test/resolver/incorrect_main/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/rollup-plugin-commonjs/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/rollup-plugin-json/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/rollup-plugin-node-resolve/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/rollup-pluginutils/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/rollup/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/vlq/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/node_modules/wolfy87-eventemitter/package.json" />
+      <path value="$PROJECT_DIR$/d3/charts/package.json" />
+      <path value="$PROJECT_DIR$/d3/node_modules/@types/estree/package.json" />
+      <path value="$PROJECT_DIR$/d3/node_modules/@types/node/package.json" />
+      <path value="$PROJECT_DIR$/d3/node_modules/rollup/package.json" />
+      <path value="$PROJECT_DIR$/vue源码解读/vue/package.json" />
+      <path value="$PROJECT_DIR$/vue源码解读/vue/packages/vue-server-renderer/package.json" />
+      <path value="$PROJECT_DIR$/vue源码解读/vue/packages/vue-template-compiler/package.json" />
+      <path value="$PROJECT_DIR$/vue源码解读/vue/packages/weex-template-compiler/package.json" />
+      <path value="$PROJECT_DIR$/vue源码解读/vue/packages/weex-vue-framework/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="width" value="1333" />
+    <option name="height" value="1047" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="myDocument" type="b2602c69:ProjectViewProjectNode" />
+              <item name="myDocument" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="myDocument" type="b2602c69:ProjectViewProjectNode" />
+              <item name="myDocument" type="462c0819:PsiDirectoryNode" />
+              <item name="d3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="myDocument" type="b2602c69:ProjectViewProjectNode" />
+              <item name="myDocument" type="462c0819:PsiDirectoryNode" />
+              <item name="d3" type="462c0819:PsiDirectoryNode" />
+              <item name="charts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="myDocument" type="b2602c69:ProjectViewProjectNode" />
+              <item name="myDocument" type="462c0819:PsiDirectoryNode" />
+              <item name="d3" type="462c0819:PsiDirectoryNode" />
+              <item name="charts" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="myDocument" type="b2602c69:ProjectViewProjectNode" />
+              <item name="myDocument" type="462c0819:PsiDirectoryNode" />
+              <item name="d3" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="559063ba-4e34-43f0-91e6-95914009825c" name="Default" comment="" />
+      <created>1529572095340</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1529572095340</updated>
+      <workItem from="1529572096672" duration="1408000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1408000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17017913" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/d3/charts/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="138" column="16" selection-start-line="138" selection-start-column="16" selection-end-line="138" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
