@@ -40,6 +40,8 @@ Mongoose，因为封装了对MongoDB对文档操作的常用处理方法，可�
 4、 命名行输入`mongo`,进行交互
 *可讲mongod添加到系统服务，自动系统，以后开机无需在使用mongod命令*
 
+[mac下安装mongdb](https://www.cnblogs.com/weixuqin/p/7258000.html)
+
 ### 准备
 
 1、 安装mongoose
