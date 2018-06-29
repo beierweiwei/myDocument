@@ -55,7 +55,7 @@ var slice = curry(function (end, string) {
 var removeHead = slice(0)
 
 
-var isLasetInStock = compose(_.prop('in_stock'),last)
+var isLasetInStock = compose(_.prop('in_stock'),_.last)
 
 var nameofFirstCar = compose(_.prop('name'), _.head)
 
