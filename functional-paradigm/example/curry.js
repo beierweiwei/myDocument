@@ -38,33 +38,4 @@ var words = split(' ')
 //test 
 var abc = words('123 456 sdf skdfj  sdkfj')
 
-sentences = map(words)
 
-
-
-var map = curry(function (operator,sentencesStr) {
-	return map(sentencesStr, operator)
-})
-
-console.log(abc)
-
-var slice = curry(function (end, string) {
-	return string.slice(end)	
-}) 
-
-var removeHead = slice(0)
-
-
-var isLasetInStock = compose(_.prop('in_stock'),_.last)
-
-var nameofFirstCar = compose(_.prop('name'), _.head)
-
-compose(_average,  map(function(c){return c.dollar_value}))
-
-sanitizeNames = compose(map(_underscores))
-
-var availablePrice = compose(_curry(function(js, str) {
-	return str.join(js)
-}),map(function(x) {
-	return accouting.formateMoney(x.dollar_value)
-}),map(_.props('in_stock')))
