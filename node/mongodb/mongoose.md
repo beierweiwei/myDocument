@@ -679,4 +679,7 @@ Mongoose: users.findAndModify({ username: 'i5ting for update 2' }) [] { '$set': 
 
 # 其他
 
+[修改Mongoose查询返回的对象](https://www.jianshu.com/p/e78fa39aa43f)
+[mongoose设置unique不生效问题解决](https://blog.csdn.net/u013263917/article/details/78451448)
+
 http://nodeonly.com/nodesang/#/4
