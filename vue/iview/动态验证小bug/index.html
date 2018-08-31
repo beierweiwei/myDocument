@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>iveiw dynmic validate</title>
+</head>
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<link rel="stylesheet" href="http://unpkg.com/iview/dist/styles/iview.css">
+	<!-- import iView -->
+	<script src="http://unpkg.com/iview/dist/iview.min.js"></script>
+	<div id="iveiw-dynmic-validate">
+		<i-form :model="form" ref="form">
+				<form-item 
+					v-for="(item, idx) in form.list"
+					:key="idx"
+					:prop="'list.' + idx" 
+					:rules="[{required: true, trigger: 'blur'}]"
+				>
+					<i-input v-model="form.list[idx]" style="width: 50%;"></i-input>
+					<i-button @click="modifyList('add', idx)">+</i-button>
+					<i-button @click="modifyList('delete',idx)">-</i-button>
+				</form-item>
+				<i-button @click="reset">reset</i-button>
+		</i-form>
+</div>
+<script>
+	var app = new Vue({
+		el: '#iveiw-dynmic-validate',
+		data: {
+			form: {
+				list: ['']
+			}
+		},
+		methods: {
+			modifyList (action, idx) {
+				let list = this.form.list 
+				if (action === 'add') {
+					this.form.list.splice(idx + 1, 0, '')
+				}
+				if (action === 'delete') {
+					if (list.length <=1) return
+					this.form.list.splice(idx, 1)
+				}
+			},
+			reset () {
+				//先清空验证信息，然后清空list数据，顺序反了list数据不会清空
+				this.$refs.form.resetFields()
+				this.form.list = ['']
+			}
+		}
+	})
+</script>
+</body>
+</html>
