@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>iveiw dynmic validate</title>
+</head>
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<link rel="stylesheet" href="http://unpkg.com/iview/dist/styles/iview.css">
+	<!-- import iView -->
+	<script src="http://unpkg.com/iview/dist/iview.min.js"></script>
+	<div id="iveiw-modal-test">
+		<i-button @click="isShow = true">点我</i-button>
+		<Modal v-model="isShow" title="test" :loading="true"  @on-ok="submit" ref="modal1">
+			<i-form :model="form" ref="form" :model="form" :rules="formValidate">
+				<form-item prop="input" label="input">
+					<i-input v-model="form.input" ></i-input>
+				</form-item>
+			</i-form>
+		</Modal>
+	</div>
+<script>
+	var app = new Vue({
+		el: '#iveiw-modal-test',
+		data: {
+			isShow: false,
+			form: {
+				input: ''
+			},
+			formValidate: {
+				input: 
+					[
+						{ required: true, message: 'Mailbox cannot be empty', trigger: 'blur' }
+            // { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
+					]
+				
+			}
+		},
+		methods: {
+			submit () {
+				// modal组件如果不佳loading则点击submit，即使验证不通过modal也会自动关闭。
+				// 加了loading之后，需要手动关闭moal(isShow = false), 根据需要修改确定按钮的loading状态this.refs.modal1.buttonLoading = false
+				this.$refs.form.validate(valid => {
+					if (valid) {
+						this.$Message.success('success')
+						this.isShow = false
+					}else {
+						this.$refs.modal1.buttonLoading = false
+						this.$Message.error('error')
+					}
+				})
+			},
+			reset () {
+				//先清空验证信息，然后清空list数据，顺序反了list数据不会清空
+				this.$refs.form.resetFields()
+				this.form.list = ['']
+			}
+		}
+	})
+</script>
+</body>
+</html>
