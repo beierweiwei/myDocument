@@ -15,7 +15,6 @@ async function getSomething() {
 	var result = await Promise.resolve(something).then((val) => val);
 	return result;
 }
-
 async function getSomethingAfter() {
 	var getSomethingPromise = getSomething();
 	let res1 = await getSomethingPromise.then((val) => { val.res1 = val.far; return val});
