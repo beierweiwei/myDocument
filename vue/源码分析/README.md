@@ -1,22 +1,33 @@
 version: 2.5.21
 
-1、流程
-new Vue
-Vue._init
+## 1、vue实例化流程
+new Vue({...})
+
+### Vue._init
 initState initState, initProps, initMethods, initData, initComputed, initWatch
-initData
-     observe // 判断data是否已经被observe  if (value.__ob__ instanceof Observer) {ob = value.__ob__;} else if{Observer }
+#### initData
+     observe // 判断data是否已经被observe  if (value.__ob__ instanceof Observer) {ob = value.__ob__;} else { Observer }
      Observer 创建依赖 this.dep = new Dep()
      walk 给data上的每个一个属性进行defineReactive
-     defineReactive  创建Dep实例（var dep = new Dep()）--> Object.defineProperty(obj, key, {get: function(){// 在get中，收集依赖}, s         et: function() {// set中修改data.key的值，然后dep.notify()}}) 
+     defineReactive  创建Dep实例（
+        var dep = new Dep()
+        ...
+        Object.defineProperty(obj, key, {
+          get: function(){
+            // 在get中，收集依赖
+          }, 
+          set: function() {
+            // set中修改data.key的值，然后dep.notify()
+          }
+        }) 
+
 ...
-initWatch 遍历vue.$options.watch的每个属性，调用createWatcher vm.$watch(expOrFn, handler, options)
-     createWatcher vm.$watch(expOrFn, handler, options) 
-      Vue.$watch() new Watcher的时候 vue会将Watcher实例push到vm._watcher中,最后拿到观察（data）属性的getter方法
-             wather.get(): 在生成watcher实例时，会将Dep.tartet 赋值，然后去调用观察属性的get方法，这样就完成了收集依赖
-     new Watcher()
 
+#### initWatch 
+遍历vue.$options.watch的每个属性，调用`createWatcher vm.$watch(expOrFn, handler, options)` 。`Vue.$watch()`:  `new Watcher`的时候 vue会将Watcher实例push到`vm._watcher`中,最后拿到观察（data）属性的getter方法
+`wather.get()`: 在生成watcher实例时，会将`Dep.tartet`赋值，然后去调用观察属性的get方法，这样就完成了收集依赖
 
+### mount    
 ```js
 Vue.$mount //（解析挂载dom, 没有render根据模板生成render函数，）
         // ...
@@ -86,6 +97,8 @@ mountComponent (vm, el, hydrating)
     }
 ```
 
+### 疑问
+在new Observer时，生成了一个新的deps挂载到observer实例上，后续的watcher是如何被添加进来的？
 
 1、数据绑定
 

@@ -33,4 +33,5 @@ var urlEncode = function(param, key, encode) {
 		}
 	}
 	return paramStr;
-};
+}
+
