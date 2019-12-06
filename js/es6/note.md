@@ -1,55 +1,61 @@
-6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）。 
+# ES6学习笔记
+
+## 一些定义：
+* 解构赋值：ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）。 
 解构赋值右边为对象，不为对象转换为对象，转换不鸟的就报错。
-Proxy
-定义：Proxy是es6新增一个类。Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。
-Proxy 实际上重载（overload）了点运算符，即用自己的定义覆盖了语言的原始定义。
+* Proxy：Proxy是es6新增一个类。Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。
+## Proxy 实际上重载（overload）了点运算符，即用自己的定义覆盖了语言的原始定义。
 使用场景：
+
 文档：
+
 调用：
+```
 new Proxy({}, {
     get () {},
         set () {}
         
 })
+```
+参数:
+* 一实际需要代理的目标对象。
+*  二代理操作配置，每一个代理操作需要对应的处理函数。如果配置对象为空，则会直接访问目标对象。
 
-参数一实际需要代理的目标对象。
-参数二代理操作配置，每一个代理操作需要对应的处理函数。如果配置对象为空，则会直接访问目标对象。
 
-
-Reflect
+## Reflect
 定义：用于操作对象。将Object对象的一些明显属于语言内部的方法（比如Object.defineProperty），放到Reflect对象上。修改某些Object上的方法返回结果。
 
-Reflect.ownKeys (target)
-Reflect.ownKeys方法用于返回对象的所有属性，基本等同于Object.getOwnPropertyNames与Object.getOwnPropertySymbols之和。
+### Reflect.ownKeys (target)
+### Reflect.ownKeys方法用于返回对象的所有属性，基本等同于Object.getOwnPropertyNames与Object.getOwnPropertySymbols之和。
 
-Promise
-Promise.resolve
+## Promise
+### Promise.resolve
 时需要将现有对象转为 Promise 对象，Promise.resolve方法就起到这个作用。
 如果要转换的对象是一个thenable 对象，这在将他转换成promise对象后立即调用thenable的then方法。
 Promise.resolve().then()立即resolve()的 Promise 对象，是在本轮“事件循环”（event loop）的结束时执行，而不是在下一轮“事件循环”的开始时。 
-Promise.try()
+### Promise.try()
 两点作用：
-包装的函数如果时同步则同步执行，如果异步则异步执行。
-错误处理，不管同步或者异步操作抛出的异常都可以通拓promse的catch方法捕获。而不需使用try...catch单独处理同步函数。
-与generate使用
-Promise.race
-const p = Promise.race([p1, p2, p3]);
+* 包装的函数如果时同步则同步执行，如果异步则异步执行。
+* 错误处理，不管同步或者异步操作抛出的异常都可以通拓promse的catch方法捕获。而不需使用try...catch单独处理同步函数。
+### 与generate使用
+### Promise.race
+`const p = Promise.race([p1, p2, p3])`
 Promise.race方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例。上面代码中，只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给p的回调函数。  
 
-函数的扩展
-
+## 函数的扩展
 参数默认值： 默认值是惰性求值
 默认参数作用域
 箭头函数
 尾调用优化（trail call）:某个函数的最后一步是调用另一个函数。
 catch后的参数可省略（es2019）
 
-数组的扩展
+## 数组的扩展
 扩展运算符（spread）是三个点（...）。它好比 rest 参数的逆运算，将一个数组转为用逗号分隔的参数序列。 
-Array.from() :用于将两类对象转为真正的数组：类似数组的对象（array-like object）和可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）。 
+### Array.from() 
+用于将两类对象转为真正的数组：类似数组的对象（array-like object）和可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）。 
 任何类数组(有length属性)的对象，都可以通过Array.from方法转为数组，而此时扩展运算符就无法转换。对于还没有部署该方法的浏览器，可以用Array.prototype.slice方法替代。
 Array.from({ length: 3  });// [ undefined, undefined, undefined  ]
-数组实例方法：
+### 数组实例方法：
 copyWithin
 find(),findIndex(),这两个方法都可以通过Object.is()判断是否存在NaN，弥补了数组的indexOf方法的不足。 
 fill
@@ -57,7 +63,7 @@ entries
 keys
 values()
 flat，flatMap
-数组的空位
+### 数组的空位
 数组的空位指，数组的某一个位置没有任何值。比如，Array构造函数返回的数组都是空位。空位不是undefined，一个位置的值等于undefined，依然是有值的。空位是没有任何值
 Array(3) // [, , ,]
 ES5 对空位的处理，已经很不一致了，大多数情况下会忽略空位。
@@ -67,34 +73,37 @@ map()会跳过空位，但会保留这个值
 join()和toString()会将空位视为undefined，而undefined和null会被处理成空字符串。
 ES6 则是明确将空位转为undefined。
 
-Array.prototype.sort() 的排序稳定性
+# Array.prototype.sort() 的排序稳定性
 
-对象的扩展
-对象的数据属性和访问器属性
-属性描述
-访é®属性
 
-get —— 一个没有参数的函数，在读取属性时工作，
-set —— 带有一个参数的函数，当属性被设置时调用，
-enumerable —— 与数据属性相同，
-configurable —— 与数据属性相同。
+## 对象的扩展
+### 对象的数据属性和访问器属性
+访问属性
+* get —— 一个没有参数的函数，在读取属性时工作，
+* set —— 带有一个参数的函数，当属性被设置时调用，
+* enumerable —— 与数据属性相同，
+* configurable —— 与数据属性相同。
 数据属性和属性描述
-value
-writeable
-ennumberable
-configable
+* value
+* writeable
+* ennumberable
+* configable
 定义字面量对象时，属性可使用表达式，加[]符号，当[]中的值为对象时，会被转换为string[object object]
 
 方法name属性，返回方法名
+
 取值器和设值器的方法，会在对象属性访问器属性描述对象的get和set属性上，返回的函数名为set或get加上方法名。
+
 有两种特殊情况：bind方法创造的函数，name属性返回bound加上原函数的名字；Function构造函数创造的函数，name属性返回anonymous。
 当属性为Symbol值时，方法的name属性返回Symbol值的描述符。
-属性的枚举
+
+### 属性的枚举
 当属性的描述对象属性 ennumberable为false时，遍历时一下方法会忽略改属性。
 Object.keys() 对象自身可枚举属性
 for...in 对象及继承的可枚举属性
 JSON.stringify
 Object.assign()
+
 属性遍历
 es6有5种方法对对象属性进行遍历。
 for...in..., Object.keys(), Object.getOwnPropertyNames(), Object.getOwnPropertySymbols(), Reflect.ownKeys(obj)
@@ -102,12 +111,12 @@ for...in..., Object.keys(), Object.getOwnPropertyNames(), Object.getOwnPropertyS
 super关键字，只能用在对象的方法中，代指对象的原型对象，只有对象方法的简写中才能使用。
 对象扩展运算符 ...（ES2018）
 
-解构赋值
+### 解构赋值
 对象的解构赋值用于从一个对象取值，相当于将目标对象自身的所有可遍历的（enumerable）、但尚未被读取的属性，分配到指定的对象上面。所有的键和它们的值，都会拷贝到新对象上面。
 扩展运算符
 
 
-对象的新增方法
+### 对象的新增方法
 Object.is() 判断和严等相反( NaN !== NaN ,+0 === -0 )
 Object.assign(target1, source1, source2, ...): 合并对象自身可遍历属性。 注意：合并get方法的属性时，合并后的值是调用get方法的返回值。浅拷贝。同名属性替换。参数可为数组，作为对象。
 Object.getOwnPropertyDescriptors(es2017)：
@@ -117,7 +126,7 @@ const shallowMerge = (target, source) => Object.defineProperties(   target,   Ob
 
 Object.create(proto[<Plug>PeepOpenropertiesObject] )(es5), Object.create()方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__。
 
-字符串扩展
+## 字符串扩展
 
 1.字符测unicode表示法。超出\u0000-\uffff 范围的添加{}可正常解码。
 2.字符串添加了遍历接口，使用for...of循环遍历，同时遍历时可以识别大于0xFFFF的码点，而for循环无法识别。
@@ -138,7 +147,7 @@ padStart, padEnd(es2017)
 trimStart, trimEnd
 matchAll
 
-正则扩展
+## 正则扩展
 1、字符串的4个方法可以使用正则：match,replace,search,split,es6语言内部实现与正则相关的方法全部定义在RegExp对象上。
 2、新增
 u修饰符，含义为‘Unicode模式’。用来正确解析大于\uFFFF的Unicode字符（作为单个字符解析，如果没有u则会解析为两个字符）。也就是说，会正确处理四个字节的 UTF-16 编码。
@@ -154,7 +163,7 @@ const RE_TWICE = /^(?<word>[a-z]+)!\k<word>$/; RE_TWICE.test('abc!abc') // true 
 
 math方法，一段字符有多个匹配，则需要通过循环方法多次匹配才可匹配到完整的结果。目前有一个提案增加了String.prototype.matchAll方法，可以一次性取出所有匹配。不过，它返回的是一个遍历器（Iterator），而不是数组。 
 
-Iterator & for ... of
+## Iterator & for ... of
 Iterator 是一种接口，为各种不同的数据结构提供统一的访问机制。 
 作用：提供一个统一的、简便的访问接口；二是使得数据结构的成员能够按某种次序排列；三是 ES6 创造了一种新的遍历命令for...of循环，Iterator 接口主要供for...of消费。 
 Iterator与generator函数
@@ -173,12 +182,12 @@ NodeList 对象
 不同于forEach方法，它可以与break、continue和return配合使用。
 提供了遍历所有数据结构的统一操作接口。
 
-异步遍历器ES2018
+## 异步遍历器ES2018
 异步遍历器的最大的语法特点，就是调用遍历器的next方法，返回的是一个 Promise 对象。 对象的异步遍历器接口，部署在Symbol.asyncIterator属性上面。  
 for await...of
-异步Generator函数
+## 异步Generator函数
 
-Generator函数
+## Generator函数
 含义：状态机 遍历器
 
 Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为与传统函数完全不同。
@@ -206,4 +215,5 @@ Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为�
   如果在 Generator 函数内部，调用另一个 Generator 函数。需要在前者的函数体内部，自己手动完成遍历。 yield*后面的 Generator 函数（没有return语句时），等同于在 Generator 函数内部，部署一个for...of循环。 
   任何数据结构只要有 Iterator 接口，就可以被yield*遍历  
   8、作为对象属性的 Generator 函数
-  9、Generator 函数总是返回一个遍历器，ES6 规定这个遍历器是 Generator往
+  9、Generator 函数总是返回一个遍历器，ES6 规定这个遍历器是 Gene往
+  
