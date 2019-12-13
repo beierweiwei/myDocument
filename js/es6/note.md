@@ -264,8 +264,57 @@ Object.create(proto[<Plug>PeepOpenropertiesObject] )// es5,Object.create()方法
 
 `thunk`函数的含义：编译器的“传名调用”实现，往往是将参数放到一个临时函数之中，再将这个临时函数传入函数体。这个临时函数就叫做 `Thunk` 函数。
 
-js语言的Thunk函数
+### js语言的Thunk函数
 js中的thunk函数替换的不是表达式，而是多参数函数，将其替换成一个只接受回调函数作为参数的单参数函数。
 
-### Thunkify模块
+> 任何函数，只要参数有回调函数，就能写成 Thunk 函数的形式。下面是一个简单的 Thunk 函数转换器。
+```
+// ES5版本
+var Thunk = function(fn){
+    return function (){
+        var args = Array.prototype.slice.call(arguments);
+        return function (callback){
+            args.push(callback);
+                return fn.apply(this, args);
+        }
+    }
+}
+
+// ES6版本
+const Thunk = function(fn) {
+    return function (...args) {
+        return function (callback) {
+            return fn.call(this, ...args, callback);
+        }
+  
+    }
+
+}
+```
+### Thumkify模块
+将普通的函数转为thunk函数工具。
+### Generator函数的流程管理
+思路： 
+1. 定义一个run函数，调用generate。
+2. run内部定义一个next函数，和异步遍历的思路相同。一个thunk函数，在将next（）函数作为参数传给这个thunk函数。next中，移动gen的指针，然后将next作为回调，传给指针的返回值，即thunk函数的回调参数。
+
+### Thunk函数的自动流程管理
+### co模块
+用于Genrator函数的自执行
+### co模块源码
+
+## async函数
+asnc函数是对Generator函数的替换和改进。
+* 内置执行器
+* 更好的语义
+* 更广的适用性
+* 返回值是Promise
+> 进一步说，async函数完全可以看作多个异步操作，包装成的一个 Promise 对象，而await命令就是内部then命令的语法糖。
+### await命令
+await命令后面返回一个Promise对象，如果不是Promise对象就返回对应的值。
+如果是thenable对象，那么await会将其等同于Promise对象。
+### async实现原理
+这里需要反复查看理解
+
+## Class
 
