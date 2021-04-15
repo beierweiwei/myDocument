@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jsonp-demo</title>
+</head>
+<body>
+  
+  <script>
+    function getJsonp (url, success) {
+      const query = url.split('?').pop();
+      const cbRegExpRes = query.match(/&?cb=([^&]*)/)
+      const cb = cbRegExpRes && cbRegExpRes[1]
+      let scriptEle = document.createElement('script')
+      scriptEle.setAttribute('src', url);
+      document.body.append(scriptEle)
+      scriptEle.onload = () => {
+        return success(eval(`${cb}()`))
+      }
+      // document.removeChild(scriptEle)
+     
+    }
+
+    getJsonp('./jsonp-data.js?cc=dd&cb=test&name=123&cd=456', function (data) {
+      console.log(data)
+    })
+  </script>
+</body>
+</html>
